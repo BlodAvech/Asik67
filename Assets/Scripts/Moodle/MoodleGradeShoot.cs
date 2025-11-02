@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MoodleGradeShoot : StateMachineBehaviour
@@ -7,10 +8,11 @@ public class MoodleGradeShoot : StateMachineBehaviour
     private Animator animator;
 	private MoodleStateManager stateManager;
 
-	[SerializeField] private GameObject projectile;
+	[SerializeField] private GameObject projectilePrefab;
 	[SerializeField] private float minTimeBtwShoots = 0f;
 	[SerializeField] private float maxTimeBtwShoots = 2f;
 	private float timeBtwShoot;
+	private bool isShooting = false;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
@@ -25,7 +27,7 @@ public class MoodleGradeShoot : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		timeBtwShoot -= Time.deltaTime;
-		if (timeBtwShoot <= 0) Shoot();
+		if (timeBtwShoot <= 0 && !isShooting) Shoot();
 	}
 
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -35,8 +37,11 @@ public class MoodleGradeShoot : StateMachineBehaviour
 
 	public void Shoot()
 	{
-		timeBtwShoot = Random.Range(minTimeBtwShoots, maxTimeBtwShoots); 
+		isShooting = true;
+		timeBtwShoot = Random.Range(minTimeBtwShoots, maxTimeBtwShoots);
 
+		GradeProjectile.Create(projectilePrefab, animator.transform.position, Mathf.Floor(Random.Range(0, 100f)), Random.Range(10f, 20f), 20f , FindFirstObjectByType<PlayerController>().transform);
 
+		isShooting = false;
 	}
 }

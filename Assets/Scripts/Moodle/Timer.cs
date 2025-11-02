@@ -29,7 +29,6 @@ public class Timer : MonoBehaviour
 		{
 			elapsed += Time.fixedDeltaTime;
 			yield return new WaitForFixedUpdate();
-			Debug.Log(elapsed);
 		}
 
 		OnTimerEnd?.Invoke(stateIndexes);

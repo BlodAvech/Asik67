@@ -163,7 +163,7 @@ AnimatorStateMachine:
     m_Position: {x: 270, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4747165248220315679}
-    m_Position: {x: 240, y: 240, z: 0}
+    m_Position: {x: 250, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2522379730997178400}
     m_Position: {x: 280, y: 10, z: 0}
@@ -285,7 +285,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1038833b923c8134cb68a8ae9f4990d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  minTimer: 5
-  maxTimer: 10
+  minTimer: 10
+  maxTimer: 15
+  projectilePrefab: {fileID: 3472795043522451325, guid: 5e0b172bc3c6efa40bb3d064910b7875, type: 3}
   minTimeBtwShoots: 0
-  maxTimeBtwShoots: 2
+  maxTimeBtwShoots: 1
