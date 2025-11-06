@@ -11,7 +11,7 @@ public class MoodleIdle : StateMachineBehaviour
 	public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 		stateManager = animator.GetComponent<MoodleStateManager>();
-        stateManager.StartStateSelection(minTimer, maxTimer, 1 ,2);
+        stateManager.StartStateSelection(minTimer, maxTimer, 1 ,2 , 3);
         
         this.animator = animator;
     }
@@ -22,21 +22,5 @@ public class MoodleIdle : StateMachineBehaviour
 
 	public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-	}
-
-	public void SelectNextState()
-	{
-        int stateIndex = Random.Range(0, 2);
-        
-        switch(stateIndex)
-		{
-            case 0:
-                animator.SetTrigger("Move");
-                break;
-
-            case 1:
-                animator.SetTrigger("GradeShoot");
-                break;
-		}
 	}
 }

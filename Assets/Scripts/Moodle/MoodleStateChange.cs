@@ -31,7 +31,6 @@ public class MoodleStateManager : MonoBehaviour
         StopStateSelection(); 
 
         int stateIndex = Random.Range(0, stateIndexes.Length);
-        Debug.Log(stateIndex);
 		animator.SetInteger("StateIndex", stateIndexes[stateIndex]);
     }
 }

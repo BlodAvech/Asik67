@@ -5,14 +5,26 @@ using UnityEngine;
 public abstract class Weapon : MonoBehaviour
 {
 	protected Animator animator;
-	[SerializeField] protected GameObject container;
+	protected GameObject container;
 
-	void Start()
+	public bool IsAttack { get; private set; }
+
+	void Awake()
 	{
 		animator = GetComponent<Animator>();
-		container = GetComponentInParent<Hand>().gameObject;
 	}
 	
-	public abstract void AttackPerformed();
-	public virtual void AttackCanceled() { }
+	public virtual void AttackPerformed()
+	{
+		IsAttack = true;
+	}
+	public virtual void AttackCanceled()
+	{
+		IsAttack = false;
+	}
+
+	public void SetContainer(GameObject container)
+	{
+		this.container = container;
+	}
 }

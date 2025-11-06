@@ -6,6 +6,7 @@ public class WeaponContainer : MonoBehaviour
     [SerializeField] private Weapon[] weapons = new Weapon[1];
     private Weapon currentWeapon;
     [SerializeField] Weapon secondaryWeapon;
+    [SerializeField] GameObject container;
     private int currentWeaponIndex = 0;
 
     void Awake()
@@ -24,24 +25,34 @@ public class WeaponContainer : MonoBehaviour
 
     private void PrimaryAttackPerformed() => currentWeapon?.AttackPerformed();
     private void PrimaryAttackCanceled() => currentWeapon?.AttackCanceled();
-    private void SecondaryAttackPerformed() => secondaryWeapon?.AttackCanceled();
+    private void SecondaryAttackPerformed() => secondaryWeapon?.AttackPerformed();
     private void SecondaryAttackCanceled() => secondaryWeapon?.AttackCanceled();
 
     private void SwitchWeapon()
     {
-        weapons[currentWeaponIndex].gameObject.SetActive(false);
-        currentWeaponIndex = ++currentWeaponIndex % weapons.Length;
-        weapons[currentWeaponIndex].gameObject.SetActive(true);
-        currentWeapon = weapons[currentWeaponIndex];
+
+        if (currentWeapon.IsAttack)
+        {
+            currentWeapon?.AttackCanceled();
+            currentWeaponIndex = ++currentWeaponIndex % weapons.Length;
+            currentWeapon = weapons[currentWeaponIndex];
+            currentWeapon?.AttackPerformed();
+        }
+		else
+		{
+			currentWeaponIndex = ++currentWeaponIndex % weapons.Length;
+            currentWeapon = weapons[currentWeaponIndex];
+		}
     }
     
     private void InitWeapons()
 	{
         foreach (var weapon in weapons)
         {
-            weapon.gameObject.SetActive(false);
+            // weapon.gameObject.SetActive(false);
+            weapon.SetContainer(container);
         }
         currentWeapon = weapons[currentWeaponIndex];
-        weapons[currentWeaponIndex].gameObject.SetActive(true);
+        // weapons[currentWeaponIndex].gameObject.SetActive(true);
 	}
 }

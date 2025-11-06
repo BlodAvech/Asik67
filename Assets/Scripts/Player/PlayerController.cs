@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D Rigidbody { get; private set; }
     public float Input { get; set;}
-    [SerializeField] private Transform sprite;
+    [SerializeField] public Transform sprite;
     
     private bool isFlipped = false;
 

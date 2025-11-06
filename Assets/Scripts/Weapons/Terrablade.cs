@@ -14,11 +14,11 @@ public class Terrablade : Weapon
 	[SerializeField] private Vector3 offset;
 	[SerializeField] private float radius;
 	[SerializeField] private LayerMask targetMask;
-	[SerializeField] private float knockback = 20f;
 
 	private bool canAttack = true;
 	public override void AttackPerformed()
 	{
+		base.AttackPerformed();
 		if (!canAttack) return;
 		animator.SetTrigger("attack");
 		canAttack = false;
@@ -30,11 +30,6 @@ public class Terrablade : Weapon
 		foreach(var targetHealth in GetHealthTargets())
 		{
 			targetHealth.FixedDamage(damage);
-			if(targetHealth.TryGetComponent<Rigidbody2D>(out Rigidbody2D targetRb))
-			{
-				Vector2 dir = transform.right; 
-				targetRb.AddForce(dir * knockback, ForceMode2D.Impulse);
-			}
 		}
 	}
 

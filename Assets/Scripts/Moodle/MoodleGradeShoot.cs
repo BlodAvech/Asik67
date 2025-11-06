@@ -11,6 +11,8 @@ public class MoodleGradeShoot : StateMachineBehaviour
 	[SerializeField] private GameObject projectilePrefab;
 	[SerializeField] private float minTimeBtwShoots = 0f;
 	[SerializeField] private float maxTimeBtwShoots = 2f;
+	[SerializeField] private float minSpeed = 5f;
+	[SerializeField] private float maxSpeed = 30f;
 	private float timeBtwShoot;
 	private bool isShooting = false;
 
@@ -40,7 +42,7 @@ public class MoodleGradeShoot : StateMachineBehaviour
 		isShooting = true;
 		timeBtwShoot = Random.Range(minTimeBtwShoots, maxTimeBtwShoots);
 
-		GradeProjectile.Create(projectilePrefab, animator.transform.position, Mathf.Floor(Random.Range(0, 100f)), Random.Range(10f, 20f), 20f , FindFirstObjectByType<PlayerController>().transform);
+		GradeProjectile.Create(projectilePrefab, animator.transform.position, Mathf.Floor(Random.Range(0, 100f)), Random.Range(minSpeed, maxSpeed) , FindFirstObjectByType<PlayerController>().transform);
 
 		isShooting = false;
 	}
